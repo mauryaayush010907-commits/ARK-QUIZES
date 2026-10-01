@@ -1,0 +1,1045 @@
+@import "tailwindcss";
+
+/* =========================================================
+   ARK-QUIZES — GLOBAL DESIGN SYSTEM
+   Light professional SaaS / competition platform
+   ========================================================= */
+
+@theme {
+  /* Typography */
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Segoe UI", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  /* Core application colors */
+  --color-ink: #11182f;
+  --color-ink-2: #1e293b;
+
+  --color-panel: #ffffff;
+  --color-panel-2: #f8fafc;
+
+  --color-line: #e2e6f0;
+
+  --color-mist: #596580;
+  --color-snow: #11182f;
+
+  /* Brand */
+  --color-violet: #6c3bff;
+  --color-cyan: #19d3e6;
+
+  /* Semantic */
+  --color-gold: #f59e0b;
+  --color-rose: #ef4444;
+  --color-lime: #16b981;
+}
+
+
+/* =========================================================
+   ROOT VARIABLES
+   ========================================================= */
+
+:root {
+  color-scheme: light;
+
+  /* Brand */
+  --primary: #6c3bff;
+  --primary-hover: #5728e8;
+  --secondary: #19d3e6;
+  --accent-violet: #8b5cf6;
+
+  /* Backgrounds */
+  --bg: #f5f7fc;
+  --bg-alt: #eef1fa;
+
+  /* Surfaces */
+  --card: #ffffff;
+  --card-soft: #f8fafc;
+
+  /* Typography */
+  --primary-text: #11182f;
+  --secondary-text: #596580;
+  --muted-text: #8993aa;
+
+  /* Borders */
+  --border: #e2e6f0;
+  --border-strong: #d5dbea;
+
+  /* Status */
+  --success: #16b981;
+  --warning: #f59e0b;
+  --error: #ef4444;
+
+  /* Shadows */
+  --shadow-sm: 0 4px 14px rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 12px 30px rgba(15, 23, 42, 0.06);
+  --shadow-lg: 0 20px 50px rgba(15, 23, 42, 0.08);
+  --shadow-primary: 0 18px 40px rgba(108, 59, 255, 0.12);
+}
+
+
+/* =========================================================
+   BASE RESET
+   ========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+
+  font-family: var(--font-sans);
+
+  background:
+    radial-gradient(
+      circle at 15% 10%,
+      rgba(108, 59, 255, 0.07),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 85% 16%,
+      rgba(25, 211, 230, 0.05),
+      transparent 24%
+    ),
+    radial-gradient(
+      circle at 70% 85%,
+      rgba(139, 92, 246, 0.04),
+      transparent 22%
+    ),
+    var(--bg);
+
+  color: var(--primary-text);
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+#root {
+  position: relative;
+  isolation: isolate;
+}
+
+
+/* =========================================================
+   GLOBAL BACKGROUND GRID
+   ========================================================= */
+
+body::before {
+  content: "";
+
+  position: fixed;
+  inset: 0;
+
+  pointer-events: none;
+
+  background-image:
+    linear-gradient(
+      rgba(15, 23, 42, 0.015) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(15, 23, 42, 0.015) 1px,
+      transparent 1px
+    );
+
+  background-size: 32px 32px;
+
+  mask-image:
+    radial-gradient(
+      circle at center,
+      black 18%,
+      transparent 100%
+    );
+
+  opacity: 0.7;
+
+  z-index: -1;
+}
+
+
+/* =========================================================
+   TYPOGRAPHY
+   ========================================================= */
+
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.04em;
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+
+/* =========================================================
+   LEGACY THEME COMPATIBILITY
+   These allow existing pages to transition without
+   rewriting their functionality.
+   ========================================================= */
+
+.bg-panel {
+  background-color: var(--card);
+}
+
+.text-mist {
+  color: var(--secondary-text);
+}
+
+.text-snow {
+  color: var(--primary-text);
+}
+
+.text-gold {
+  color: var(--color-gold);
+}
+
+.text-lime {
+  color: var(--color-lime);
+}
+
+.text-rose {
+  color: var(--color-rose);
+}
+
+
+/* Existing pages contain these old translucent classes.
+   Keep their appearance compatible with the light theme. */
+
+[class~="bg-white/4"],
+[class~="bg-white/[0.03]"],
+[class~="bg-white/[0.04]"] {
+  background-color: rgba(248, 250, 252, 0.92) !important;
+}
+
+[class~="border-white/6"],
+[class~="border-white/8"],
+[class~="border-white/10"] {
+  border-color: var(--border) !important;
+}
+
+
+/* =========================================================
+   GRAIN
+   ========================================================= */
+
+.grain {
+  position: relative;
+}
+
+.grain::before {
+  content: "";
+
+  pointer-events: none;
+
+  position: absolute;
+  inset: 0;
+
+  opacity: 0.035;
+
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.95' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+
+  z-index: 0;
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   MESH BACKGROUND
+   ========================================================= */
+
+.mesh {
+  background:
+    radial-gradient(
+      900px 520px at 12% -8%,
+      rgba(124, 108, 255, 0.14),
+      transparent 55%
+    ),
+    radial-gradient(
+      780px 420px at 95% 10%,
+      rgba(76, 141, 255, 0.12),
+      transparent 46%
+    ),
+    radial-gradient(
+      640px 480px at 50% 100%,
+      rgba(214, 108, 255, 0.08),
+      transparent 48%
+    ),
+    #f5f7ff;
+}
+
+
+/* =========================================================
+   BASIC GLASS SURFACE
+   ========================================================= */
+
+.glass {
+  background: rgba(255, 255, 255, 0.82);
+
+  border: 1px solid rgba(15, 23, 42, 0.08);
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  box-shadow: var(--shadow-sm);
+}
+
+
+/* =========================================================
+   PREMIUM PANEL
+   ========================================================= */
+
+.premium-panel {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.96),
+      rgba(244, 247, 255, 0.98)
+    );
+
+  border: 1px solid rgba(15, 23, 42, 0.08);
+
+  box-shadow:
+    0 18px 60px rgba(15, 23, 42, 0.08);
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+
+/* =========================================================
+   MAIN CARD
+   FIXED FROM OLD DARK THEME
+   ========================================================= */
+
+.glass-card {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.98),
+      rgba(248, 250, 252, 0.96)
+    );
+
+  border: 1px solid var(--border);
+
+  box-shadow:
+    0 16px 40px rgba(15, 23, 42, 0.06);
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.glass-card:hover {
+  border-color: rgba(108, 59, 255, 0.24);
+
+  box-shadow:
+    0 20px 45px rgba(108, 59, 255, 0.09);
+}
+
+
+/* =========================================================
+   VIOLET GLOW
+   ========================================================= */
+
+.glow-violet {
+  box-shadow:
+    0 0 0 1px rgba(124, 108, 255, 0.20),
+    0 18px 48px rgba(124, 108, 255, 0.12);
+}
+
+
+/* =========================================================
+   CYAN GLOW
+   ========================================================= */
+
+.glow-cyan {
+  box-shadow:
+    0 0 0 1px rgba(70, 217, 255, 0.20),
+    0 18px 48px rgba(70, 217, 255, 0.10);
+}
+
+
+/* =========================================================
+   HERO SCENE
+   ========================================================= */
+
+.hero-scene {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  min-height: 520px;
+
+  overflow: hidden;
+  pointer-events: none;
+
+  border-radius: 38px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.55),
+      rgba(236, 240, 255, 0.32)
+    );
+
+  box-shadow:
+    inset 0 0 0 1px rgba(124, 108, 255, 0.06);
+}
+
+
+/* Hero atmospheric background */
+
+.hero-scene::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 5% 0 8% 12%;
+
+  border-radius: 36px;
+
+  background:
+    radial-gradient(
+      circle at 32% 36%,
+      rgba(124, 108, 255, 0.12),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 70% 38%,
+      rgba(70, 217, 255, 0.10),
+      transparent 36%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(242, 245, 255, 0.5) 30%,
+      rgba(221, 231, 255, 0.35) 100%
+    );
+
+  filter: blur(10px);
+
+  z-index: 1;
+}
+
+
+/* Hero floor glow */
+
+.hero-scene::after {
+  content: "";
+
+  position: absolute;
+
+  left: 10%;
+  right: 3%;
+  bottom: -14px;
+
+  height: 120px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      ellipse at center,
+      rgba(118, 138, 255, 0.28),
+      rgba(118, 138, 255, 0.08) 30%,
+      transparent 72%
+    );
+
+  filter: blur(26px);
+
+  z-index: 2;
+}
+
+
+/* =========================================================
+   HERO IMAGE
+   ========================================================= */
+
+.hero-image {
+  position: absolute;
+
+  right: -2%;
+  top: 50%;
+
+  width: min(56vw, 820px);
+  max-width: 820px;
+  height: 95%;
+
+  object-fit: cover;
+
+  transform: translateY(-50%);
+
+  opacity: 0.95;
+
+  filter:
+    brightness(0.92)
+    saturate(1.15)
+    contrast(1.08)
+    drop-shadow(
+      0 18px 42px rgba(103, 117, 255, 0.20)
+    );
+
+  mask-image:
+    radial-gradient(
+      ellipse at center,
+      black 56%,
+      transparent 100%
+    );
+
+  -webkit-mask-image:
+    radial-gradient(
+      ellipse at center,
+      black 56%,
+      transparent 100%
+    );
+
+  mix-blend-mode: normal;
+
+  animation:
+    floatHero 6.5s ease-in-out infinite;
+
+  z-index: 3;
+}
+
+
+/* =========================================================
+   HERO GLOWS
+   ========================================================= */
+
+.hero-glow {
+  position: absolute;
+
+  border-radius: 9999px;
+
+  filter: blur(90px);
+
+  opacity: 0.8;
+
+  z-index: 1;
+}
+
+.hero-glow--violet {
+  width: 390px;
+  height: 390px;
+
+  right: 18%;
+  top: 10%;
+
+  background: rgba(126, 92, 255, 0.26);
+}
+
+.hero-glow--blue {
+  width: 440px;
+  height: 440px;
+
+  right: 4%;
+  bottom: 2%;
+
+  background: rgba(66, 160, 255, 0.18);
+}
+
+
+/* =========================================================
+   HERO FLOOR
+   ========================================================= */
+
+.hero-floor {
+  position: absolute;
+
+  left: 10%;
+  right: 2%;
+  bottom: 14px;
+
+  height: 90px;
+
+  border-radius: 999px;
+
+  background:
+    radial-gradient(
+      ellipse at center,
+      rgba(97, 129, 255, 0.20),
+      rgba(97, 129, 255, 0.06) 35%,
+      transparent 75%
+    );
+
+  filter: blur(24px);
+
+  z-index: 2;
+}
+
+
+/* =========================================================
+   HERO PARTICLES
+   ========================================================= */
+
+.hero-particle {
+  position: absolute;
+
+  width: 6px;
+  height: 6px;
+
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.92);
+
+  box-shadow:
+    0 0 14px rgba(98, 184, 255, 0.9);
+
+  z-index: 2;
+
+  opacity: 0.8;
+}
+
+.hero-particle--1 {
+  right: 18%;
+  top: 18%;
+}
+
+.hero-particle--2 {
+  right: 30%;
+  top: 30%;
+
+  width: 4px;
+  height: 4px;
+}
+
+.hero-particle--3 {
+  right: 42%;
+  bottom: 22%;
+
+  width: 5px;
+  height: 5px;
+}
+
+.hero-particle--4 {
+  right: 12%;
+  bottom: 32%;
+
+  width: 3px;
+  height: 3px;
+}
+
+.hero-particle--5 {
+  right: 52%;
+  top: 22%;
+
+  width: 4px;
+  height: 4px;
+}
+
+
+/* =========================================================
+   PRIMARY BUTTON
+   ========================================================= */
+
+.btn-primary {
+  background:
+    linear-gradient(
+      135deg,
+      #805eff 0%,
+      #675dff 46%,
+      #4a8eff 100%
+    );
+
+  color: #ffffff !important;
+
+  border: 1px solid rgba(255, 255, 255, 0.18);
+
+  box-shadow:
+    0 10px 30px rgba(108, 92, 255, 0.25);
+
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    filter 180ms ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 18px 34px rgba(108, 92, 255, 0.32);
+
+  filter: brightness(1.04);
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+
+  filter: none;
+
+  transform: none;
+}
+
+
+/* =========================================================
+   SCROLL SURFACE
+   ========================================================= */
+
+.scroll-surface {
+  scrollbar-width: thin;
+
+  scrollbar-color:
+    rgba(100, 116, 139, 0.28)
+    transparent;
+}
+
+.scroll-surface::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.scroll-surface::-webkit-scrollbar-thumb {
+  background:
+    rgba(100, 116, 139, 0.28);
+
+  border-radius: 999px;
+}
+
+.scroll-surface::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+
+/* =========================================================
+   OPTION CARDS
+   ========================================================= */
+
+.option-card {
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease,
+    background 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.option-card:hover {
+  transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   FORM ELEMENTS
+   ========================================================= */
+
+input,
+select,
+textarea {
+  color: var(--primary-text);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--muted-text);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+}
+
+
+/* =========================================================
+   DATE / TIME INPUTS
+   ========================================================= */
+
+input[type="datetime-local"]::-webkit-calendar-picker-indicator,
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: none;
+  opacity: 0.65;
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   NO SCROLLBAR
+   ========================================================= */
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
+
+@keyframes rise {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0);
+  }
+}
+
+
+@keyframes float {
+  0%,
+  100% {
+    transform:
+      translateY(0px)
+      translateX(0px);
+  }
+
+  50% {
+    transform:
+      translateY(-18px)
+      translateX(8px);
+  }
+}
+
+
+@keyframes floatHero {
+  0%,
+  100% {
+    transform:
+      translateY(-50%)
+      translateX(0px);
+  }
+
+  50% {
+    transform:
+      translateY(calc(-50% - 12px))
+      translateX(6px);
+  }
+}
+
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.84);
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: scale(1.48);
+    opacity: 0;
+  }
+}
+
+
+/* =========================================================
+   PAGE ENTRANCE
+   ========================================================= */
+
+.anim-in {
+  animation:
+    rise 0.45s ease both;
+}
+
+
+/* =========================================================
+   LIVE INDICATOR
+   ========================================================= */
+
+.live-dot {
+  position: relative;
+}
+
+.live-dot::after {
+  content: "";
+
+  position: absolute;
+
+  inset: -4px;
+
+  border-radius: 999px;
+
+  border:
+    2px solid rgba(239, 68, 68, 0.75);
+
+  animation:
+    pulse-ring 1.5s ease-out infinite;
+}
+
+
+/* =========================================================
+   STATUS / SEMANTIC HELPERS
+   ========================================================= */
+
+.status-success {
+  color: var(--success);
+}
+
+.status-warning {
+  color: var(--warning);
+}
+
+.status-error {
+  color: var(--error);
+}
+
+.status-info {
+  color: var(--primary);
+}
+
+
+/* =========================================================
+   LIGHT SURFACE HELPERS
+   ========================================================= */
+
+.surface {
+  background: var(--card);
+
+  border:
+    1px solid var(--border);
+
+  box-shadow:
+    var(--shadow-md);
+}
+
+.surface-soft {
+  background: var(--card-soft);
+
+  border:
+    1px solid var(--border);
+}
+
+
+/* =========================================================
+   RESPONSIVE — TABLET
+   ========================================================= */
+
+@media (max-width: 1024px) {
+  .hero-scene {
+    min-height: 420px;
+
+    margin-top: 16px;
+  }
+
+  .hero-image {
+    width: min(80vw, 620px);
+
+    right: -10%;
+  }
+}
+
+
+/* =========================================================
+   RESPONSIVE — MOBILE
+   ========================================================= */
+
+@media (max-width: 640px) {
+  .hero-scene {
+    min-height: 300px;
+
+    width:
+      calc(100% + 1.5rem);
+
+    margin-left: -0.75rem;
+  }
+
+  .hero-image {
+    width: min(100vw, 440px);
+
+    right: -22%;
+
+    top: 54%;
+  }
+
+  .hero-floor {
+    left: 4%;
+    right: -4%;
+
+    bottom: 6px;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+
+    animation-iteration-count: 1 !important;
+
+    transition-duration: 0.01ms !important;
+
+    scroll-behavior: auto !important;
+  }
+}
+
+
+/* =========================================================
+   ARK-QUIZES EMPTY STATE - FORCE LIGHT TEXT
+   ========================================================= */
+
+.empty-state {
+  color: #111827 !important;
+  background: #ffffff !important;
+  border-color: #e2e8f0 !important;
+}
+
+.empty-state-title {
+  color: #111827 !important;
+}
+
+.empty-state-body {
+  color: #475569 !important;
+}
+
+.empty-state svg {
+  color: #6c3bff !important;
+}
+
+.empty-state a {
+  color: inherit;
+}
